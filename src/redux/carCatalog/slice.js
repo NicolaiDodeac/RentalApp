@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   hasMore: true,
+  currentCard: null,
 };
 
 const carsSlice = createSlice({
@@ -14,6 +15,13 @@ const carsSlice = createSlice({
   reducers: {
     setHasMore: (state, action) => {
       state.hasMore = action.payload;
+    },
+
+    addCurrent: (state, action) => {
+      state.currentCard = action.payload;
+    },
+    deleteCurrent: (state) => {
+      state.currentCard = null;
     },
   },
   extraReducers: (builder) => {
@@ -39,5 +47,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { setHasMore } = carsSlice.actions;
+export const { setHasMore, addCurrent, deleteCurrent } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

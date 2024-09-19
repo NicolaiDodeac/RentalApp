@@ -3,6 +3,7 @@ import s from "./CatalogCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFavorites } from "../../redux/favorites/selectors";
 import { addFavorites, deleteFavorites } from "../../redux/favorites/slice";
+import { addCurrent } from "../../redux/carCatalog/slice";
 const CatalogCard = ({ car }) => {
   const dispatch = useDispatch();
   const isFavorite = useSelector(selectFavorites).find(
@@ -46,6 +47,12 @@ const CatalogCard = ({ car }) => {
         </div>
         <div className={s.footer}>
           <p className={s.price}>{car.rentalPrice}/hr</p>
+          <button
+            onClick={() => dispatch(addCurrent(car))}
+            className={s.learnMore}
+          >
+            Learn more
+          </button>
         </div>
       </div>
     </div>
