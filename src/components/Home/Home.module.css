@@ -1,0 +1,161 @@
+/* Hero Section */
+.hero {
+  margin-top: 50px;
+  height: 100vh;
+  background-image: url("https://www.hertz.com/content/dam/hertz/global/blog-articles/resources/one-way-rental.jpg"); /* Replace with your image */
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 14px;
+}
+
+.heroContent {
+  color: white;
+}
+
+.oneTitle {
+  font-size: 58px;
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  margin-bottom: 50px;
+}
+
+.subtitle {
+  font-size: 58px;
+  /* margin-bottom: 32px; */
+  font-family: "Manrope", sans-serif;
+  color: #fff;
+}
+
+.subSubtitle {
+  color: #3470ff;
+}
+
+.ctaBtn {
+  background-color: #3470ff;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.ctaBtn:hover {
+  background-color: #0b44cd;
+}
+
+/* Featured Cars Section */
+.featuredCars {
+  padding: 60px 30px;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #121417;
+}
+
+.carGrid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 274px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.imageWrapper {
+  margin-bottom: 10px;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.titleWrapper {
+  padding: 0 16px;
+}
+
+.title {
+  align-items: last baseline;
+  justify-content: space-between;
+  display: flex;
+  gap: 4px;
+  color: #121417;
+  font-family: Manrope, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.model {
+  color: #3470ff;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 10px 16px;
+  line-height: 1.4;
+}
+
+.learnMore {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 16px;
+}
+
+.learnMore:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Section */
+.footer {
+  background-color: #121417;
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer a:hover {
+  color: #3470ff;
+}
+
+.socialIcons img {
+  width: 24px;
+  height: 24px;
+  margin: 0 8px;
+}

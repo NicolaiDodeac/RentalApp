@@ -1,71 +1,174 @@
-.modalWrapper {
-  padding: 20px;
-  background-color: white;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 700px;
-  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.2);
-}
-
 .modal {
+  height: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 700px;
+  width: 541px;
+  height: 752px;
+  border-radius: 24px;
   background-color: white;
-  border-radius: 16px;
-  padding: 20px;
+  padding: 40px 40px;
   box-shadow: 0 4px 60px rgba(0, 0, 0, 0.25);
 }
 
-.modal img {
+.modalWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  object-fit: cover;
+  border-radius: 14px;
   width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.modalContent {
-  padding: 20px;
-  text-align: left;
-}
-
-h2 {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: #3470ff;
-}
-
-p {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-.rentalButton {
-  display: inline-block;
-  background-color: #3470ff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.rentalButton:hover {
-  background-color: #2653cc;
+  height: 314px;
+  min-height: 289px;
 }
 
 .btnCloseModal {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 14px;
+  right: 14px;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #888;
+  color: black;
+}
+
+.carDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.carTitle {
+  display: flex;
+  gap: 5px;
+  font-weight: bold;
+  color: #121417;
+  font-family: Manrope;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 133.333%;
+}
+
+.carModel {
+  color: #3470ff;
+}
+
+.carInfo {
+  margin: 0;
+  display: flex;
+  padding-right: 200px;
+  max-height: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+  color: rgba(18, 20, 23, 0.5);
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.description {
+  color: #121417;
+  font-size: 14px;
+  margin-bottom: 24px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 142.857%;
+}
+
+.sectionTitle {
+  margin: 0;
+  margin-bottom: 8px;
+  color: #121417;
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 142.857%;
+}
+
+.accessories {
+  margin: 0;
+  color: rgba(18, 20, 23, 0.5);
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  display: flex;
+  width: 461px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.conditions {
+  margin: 0;
+  padding: 0;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  display: flex;
+  width: 461px;
+  height: 72px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.condition {
+  color: #363535;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.24px;
+  display: flex;
+  padding: 7px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 35px;
+  background: #f9f9f9;
+}
+
+.highlight {
+  color: #3470ff;
+  font-weight: 600;
+}
+
+.rentalButton {
+  display: block;
+  width: 168px;
+  padding: 12px 0px;
+  min-width: 168px;
+  background-color: #3470ff;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin: 0;
+  margin-top: 24px;
+  color: var(--White, #fff);
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142.857%;
+}
+
+.rentalButton:hover {
+  background-color: #0b44cd;
 }

@@ -3,6 +3,7 @@ import { fetchCarsThunk, fetchMoreCarsThunk } from "./operations";
 
 const initialState = {
   items: [],
+  featuredCars: [],
   loading: false,
   error: null,
   hasMore: true,
@@ -19,12 +20,17 @@ const carsSlice = createSlice({
     },
 
     addCurrent: (state, action) => {
+      document.body.style.overflow = "hidden";
       state.currentCard = action.payload;
       state.isModalOpen = true;
     },
     deleteCurrent: (state) => {
+      document.body.style.overflow = "unset";
       state.currentCard = null;
       state.isModalOpen = false;
+    },
+    setFeaturedCars: (state, action) => {
+      state.featuredCars = action.payload; // <-- Set featured cars
     },
   },
   extraReducers: (builder) => {
@@ -50,5 +56,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { setHasMore, addCurrent, deleteCurrent } = carsSlice.actions;
+export const { setHasMore, addCurrent, setFeaturedCars, deleteCurrent } =
+  carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

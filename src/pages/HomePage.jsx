@@ -1,10 +1,13 @@
-// HomePage.jsx
+import Home from "../components/Home/Home";
+import { useSelector } from "react-redux";
+import { selectFeaturedCars } from "../redux/carCatalog/selectors";
+
 const HomePage = () => {
+  const featuredCars = useSelector(selectFeaturedCars); // Fetch featured cars
+
   return (
     <div>
-      <h1>Welcome to Our Car Rental Service</h1>
-      <p>We offer the best cars at the best prices across Ukraine.</p>
-      {/* Add more content as needed */}
+      <Home cars={featuredCars} /> {/* Pass featured cars as props */}
     </div>
   );
 };

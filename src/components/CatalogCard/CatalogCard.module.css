@@ -40,7 +40,6 @@
   display: flex;
   justify-content: space-between;
   padding-right: 10px;
-  /* align-items: center; */
 }
 
 .title {
@@ -108,12 +107,6 @@
   color: #999;
   margin-bottom: 16px;
 }
-
-/* .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 .learnMore {
   display: flex;

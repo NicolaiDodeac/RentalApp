@@ -5,7 +5,7 @@ import s from "./Navigation.module.css";
 
 const Navigation = () => {
   const buildLinkClass = ({ isActive }) => {
-    return clsx(s.navLink, isActive && s.activeLinkHeader);
+    return clsx(s.navLink, { [s.activeLinkHeader]: isActive });
   };
   return (
     <ul className={s.navigation}>
@@ -14,12 +14,12 @@ const Navigation = () => {
           Home
         </NavLink>
       </li>
-      <li>
+      <li className={s.navigationItem}>
         <NavLink className={buildLinkClass} to="catalog">
           Car catalog
         </NavLink>
       </li>
-      <li>
+      <li className={s.navigationItem}>
         <NavLink className={buildLinkClass} to="favorites">
           My Favorites
         </NavLink>

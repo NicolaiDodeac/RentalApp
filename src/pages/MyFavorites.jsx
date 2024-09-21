@@ -5,7 +5,7 @@ import CatalogList from "../components/CatalogList/CatalogList";
 const MyFavorites = () => {
   const favorites = useSelector(selectFavorites);
   return (
-    <div>
+    <div className="favoriteList">
       <CatalogList cars={favorites} />
     </div>
   );

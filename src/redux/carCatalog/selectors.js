@@ -4,3 +4,4 @@ export const selectError = (state) => state.cars.error;
 export const selectHasMore = (state) => state.cars.hasMore;
 export const selectCurrentCard = (state) => state.cars.currentCard;
 export const selectIsModalOpen = (state) => state.cars.isModalOpen;
+export const selectFeaturedCars = (state) => state.cars.featuredCars;

@@ -17,7 +17,7 @@ const CarCatalog = () => {
   return (
     <div className={s.catalogWrapper}>
       <div className={s.listWrap}>
-        <h1>Car Catalog</h1>
+        {/* <h1>Car Catalog</h1> */}
         <FilterPanel />
         {filteredCatalog.length ? (
           <CatalogList cars={filteredCatalog} />

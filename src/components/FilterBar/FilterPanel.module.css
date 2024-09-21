@@ -66,6 +66,11 @@
   font-weight: 500;
   line-height: 18px;
 }
+.noMileLabel {
+  position: relative;
+  color: transparent;
+  /* color: #8a8a89; */
+}
 .distInput {
   border-radius: 14px 0px 0px 14px;
   border-right: 1px solid rgba(138, 138, 137, 0.2);

@@ -3,7 +3,6 @@
   background-color: rgb(234, 233, 240);
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-family: Inter;
   font-size: 24px;
   font-style: normal;
@@ -11,9 +10,22 @@
   line-height: 24px;
   list-style: none;
   cursor: pointer;
-  padding: 20px 30px 20px 30px;
+  padding: 25px;
+  border-radius: 14px;
+}
+
+.navigationItem {
+  padding: 0 80px;
 }
 .navLink {
   text-decoration: none;
   color: black;
+}
+
+.navLink:hover {
+  color: #0b44cd;
+}
+
+.activeLinkHeader {
+  color: #3470ff;
 }

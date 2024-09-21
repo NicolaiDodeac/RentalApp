@@ -19,7 +19,6 @@ import {
   selectPrice,
 } from "../../redux/filters/selectors";
 import { setHasMore } from "../../redux/carCatalog/slice";
-// import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 const formatNumber = (num) => {
@@ -63,10 +62,8 @@ const FilterPanel = () => {
   const handleSubmit = () => {
     try {
       dispatch(addFilteredCars(filterCars(cars, filters)));
-      // toast.success("Filters applied!");
     } catch (error) {
       console.error("Failed to apply filters", error);
-      // toast.error("Error applying filters!");
     }
   };
 
@@ -109,17 +106,6 @@ const FilterPanel = () => {
                   type="text"
                   value={formatNumber(values.mileageFrom)}
                   placeholder="From"
-                  // onFocus={(e) => (e.target.placeholder = "")}
-                  // onBlur={(e) => (e.target.placeholder = "From")}
-                  // onChange={(e) => {
-                  //   let value = e.target.value;
-                  //   const numericValue = parseInt(value, 10) || 0;
-                  //   setFieldValue("mileageFrom", numericValue);
-                  //   if (numericValue >= values.mileageTo) {
-                  //     setFieldValue("mileageTo", numericValue + 1);
-                  //     dispatch(filterMileageTo(numericValue + 1));
-                  //   }
-                  //   dispatch(filterMileageFrom(numericValue));
                   onChange={(e) => {
                     const value = unformatNumber(e.target.value);
                     if (!isNaN(value)) {
@@ -137,17 +123,14 @@ const FilterPanel = () => {
                   <div className={s.error}>{errors.mileageFrom}</div>
                 )}
               </label>
-              <label className={s.mileLabel}>
+              <label className={s.noMileLabel}>
                 Car mileage / km
                 <Field
                   className={s.distRInput}
                   name="mileageTo"
-                  // type="number"
                   type="text"
                   value={formatNumber(values.mileageTo)}
                   placeholder="To"
-                  // min="0"
-                  // value={values.mileageTo}
                   onFocus={(e) => (e.target.placeholder = "")}
                   onBlur={(e) => (e.target.placeholder = "To")}
                   onChange={(e) => {
@@ -155,17 +138,6 @@ const FilterPanel = () => {
                     if (!isNaN(value)) {
                       setFieldValue("mileageTo", Number(value));
                       dispatch(filterMileageTo(Number(value)));
-                      // onChange={(e) => {
-                      //   let value = e.target.value;
-
-                      //   // Remove leading zero
-                      //   if (value.startsWith("0")) {
-                      //     value = value.replace(/^0+/, "");
-                      //   }
-
-                      //   const numericValue = parseInt(value, 10) || 0;
-                      //   setFieldValue("mileageTo", numericValue);
-                      //   dispatch(filterMileageTo(numericValue));
                     }
                   }}
                 />
