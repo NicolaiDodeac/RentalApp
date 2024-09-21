@@ -3,5 +3,4 @@ export const selectLoading = (state) => state.cars.loading;
 export const selectError = (state) => state.cars.error;
 export const selectHasMore = (state) => state.cars.hasMore;
 export const selectCurrentCard = (state) => state.cars.currentCard;
-// export const selectFavorites = (state) => state.cars.favorites;
-// export const selectFilters = (state) => state.cars.filters;
+export const selectIsModalOpen = (state) => state.cars.isModalOpen;

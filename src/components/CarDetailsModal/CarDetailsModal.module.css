@@ -1,27 +1,65 @@
-/* CarDetailsModal.module.css */
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.modalWrapper {
+  padding: 20px;
+  background-color: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .modalContent {
-  z-index: 999;
-  background: white;
   padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
-.closeButton {
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #3470ff;
+}
+
+p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.rentalButton {
+  display: inline-block;
+  background-color: #3470ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.rentalButton:hover {
+  background-color: #2653cc;
+}
+
+.btnCloseModal {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -29,7 +67,5 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-}
-.img {
-  max-width: 500px;
+  color: #888;
 }

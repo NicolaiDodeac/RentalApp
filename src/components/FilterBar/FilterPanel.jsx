@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-
-import { HiOutlineRefresh } from "react-icons/hi";
+import { TiRefreshOutline } from "react-icons/ti";
 import {
   addFilteredCars,
   filterMileageFrom,
@@ -16,49 +15,69 @@ import {
   selectFilter,
   selectMileageFrom,
   selectMileageTo,
+  selectMake,
+  selectPrice,
 } from "../../redux/filters/selectors";
 import { setHasMore } from "../../redux/carCatalog/slice";
+// import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 const formatNumber = (num) => {
-  const max = 999999;
-  if (num > 999999) return max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const max = 999000;
+  if (num > 999000) return max.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-const unformatNumber = (str) => {
-  return str.replace(/,/g, "");
+const unformatNumber = (numStr) => {
+  return numStr.replace(/,/g, "");
 };
 
 const FilterPanel = () => {
   const dispatch = useDispatch();
   const cars = useSelector(selectCars);
-  const filter = useSelector(selectFilter);
+  const filters = useSelector(selectFilter);
   const mileageFrom = useSelector(selectMileageFrom);
   const mileageTo = useSelector(selectMileageTo);
+  const make = useSelector(selectMake);
+  const price = useSelector(selectPrice);
 
-  const filterCars = (cars, filters) => {
+  const filterCars = (cars) => {
     return cars.filter((car) => {
-      const make = filters.make
-        ? car.make.toLowerCase() === filters.make.toLowerCase()
-        : true;
-      const price = filters.price
-        ? +car.rentalPrice.replace("$", "") <= filters.price
-        : true;
-      const mileage =
-        (filters.mileage.mileageFrom
-          ? filters.mileage.mileageFrom <= car.mileage
-          : true) &&
-        (filters.mileage.mileageTo
-          ? filters.mileage.mileageTo >= car.mileage
-          : true);
+      const rentalPrice =
+        typeof car.rentalPrice === "string"
+          ? Number(car.rentalPrice.replace("$", ""))
+          : car.rentalPrice || 0;
 
-      return make && price && mileage;
+      const matchMake = make
+        ? car.make.toLowerCase() === make.toLowerCase()
+        : true;
+      const matchPrice = price ? rentalPrice <= price : true;
+      const matchMileage =
+        (mileageFrom ? mileageFrom <= car.mileage : true) &&
+        (mileageTo ? mileageTo >= car.mileage : true);
+
+      return matchMake && matchPrice && matchMileage;
     });
   };
 
-  const handleChange = () => {
-    dispatch(addFilteredCars(filterCars(cars, filter)));
+  const handleSubmit = () => {
+    try {
+      dispatch(addFilteredCars(filterCars(cars, filters)));
+      // toast.success("Filters applied!");
+    } catch (error) {
+      console.error("Failed to apply filters", error);
+      // toast.error("Error applying filters!");
+    }
   };
+
+  const validationSchema = Yup.object().shape({
+    mileageFrom: Yup.number()
+      .min(0, "Mileage must be greater than or equal to 0")
+      .required("Required"),
+    mileageTo: Yup.number()
+      .min(Yup.ref("mileageFrom"), "Mileage 'To' must be greater than 'From'")
+      .required("Required"),
+  });
 
   const initialValues = {
     mileageFrom: mileageFrom,
@@ -69,33 +88,38 @@ const FilterPanel = () => {
     <div className={s.panelWrapper}>
       <Formik
         initialValues={initialValues}
-        onSubmit={handleChange}
-        // enableReinitialize
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        enableReinitialize
       >
-        {({ values, setFieldValue }) => (
+        {({ values, setFieldValue, errors, touched, resetForm }) => (
           <Form className={s.form}>
-            <span
-            //   className="w-[224px]"
-            >
+            <span className={s.InputMake}>
               <InputMake />
             </span>
-            <span
-            //   className="w-[124px]"
-            >
+            <span className={s.InputPrice}>
               <InputPrice />
             </span>
-            <span
-            //   className="flex "
-            >
-              <label
-              //   className="text-[#8a8a89] text-xs relative leading-[22px] flex flex-col"
-              >
-                Сar mileage / km
+            <span className={s.mileInput}>
+              <label className={s.mileLabel}>
+                Car mileage / km
                 <Field
+                  className={s.distInput}
                   name="mileageFrom"
-                  //   className="pl-20 bg-[#f7f7fb] border-r-2 border-t-0 border-l-0 border-b-0 text-lg rounded-l-[14px] outline-none w-40 h-12  text-black border-[2px] border-gray-200"
                   type="text"
                   value={formatNumber(values.mileageFrom)}
+                  placeholder="From"
+                  // onFocus={(e) => (e.target.placeholder = "")}
+                  // onBlur={(e) => (e.target.placeholder = "From")}
+                  // onChange={(e) => {
+                  //   let value = e.target.value;
+                  //   const numericValue = parseInt(value, 10) || 0;
+                  //   setFieldValue("mileageFrom", numericValue);
+                  //   if (numericValue >= values.mileageTo) {
+                  //     setFieldValue("mileageTo", numericValue + 1);
+                  //     dispatch(filterMileageTo(numericValue + 1));
+                  //   }
+                  //   dispatch(filterMileageFrom(numericValue));
                   onChange={(e) => {
                     const value = unformatNumber(e.target.value);
                     if (!isNaN(value)) {
@@ -108,48 +132,59 @@ const FilterPanel = () => {
                     }
                   }}
                 />
-                <p
-                //   className="absolute text-xl text-black top-8 left-5"
-                >
-                  From
-                </p>
+                <p className={s.mileText}>From</p>
+                {errors.mileageFrom && touched.mileageFrom && (
+                  <div className={s.error}>{errors.mileageFrom}</div>
+                )}
               </label>
-              <label
-              //   className="text-transparent text-xs relative leading-[22px] flex flex-col"
-              >
-                Сar mileage / km
+              <label className={s.mileLabel}>
+                Car mileage / km
                 <Field
+                  className={s.distRInput}
                   name="mileageTo"
-                  //   className="pl-14 bg-[#f7f7fb] text-lg text-black border-none  w-40 h-12 rounded-r-[14px] outline-none"
+                  // type="number"
                   type="text"
                   value={formatNumber(values.mileageTo)}
+                  placeholder="To"
+                  // min="0"
+                  // value={values.mileageTo}
+                  onFocus={(e) => (e.target.placeholder = "")}
+                  onBlur={(e) => (e.target.placeholder = "To")}
                   onChange={(e) => {
                     const value = unformatNumber(e.target.value);
                     if (!isNaN(value)) {
                       setFieldValue("mileageTo", Number(value));
                       dispatch(filterMileageTo(Number(value)));
+                      // onChange={(e) => {
+                      //   let value = e.target.value;
+
+                      //   // Remove leading zero
+                      //   if (value.startsWith("0")) {
+                      //     value = value.replace(/^0+/, "");
+                      //   }
+
+                      //   const numericValue = parseInt(value, 10) || 0;
+                      //   setFieldValue("mileageTo", numericValue);
+                      //   dispatch(filterMileageTo(numericValue));
                     }
                   }}
                 />
-                <p
-                //   className="absolute text-xl text-black top-8 left-7"
-                >
-                  To
-                </p>
+                <p className={s.mileText}>To</p>
+                {errors.mileageTo && touched.mileageTo && (
+                  <div className={s.error}>{errors.mileageTo}</div>
+                )}
               </label>
             </span>
-            <button
-              //   className="bg-[#3470ff] rounded-xl p-[14px] w-[136px] h-12 text-center text-white font-semibold text-sm hover:bg-[#0b44cd] ease-linear duration-200 outline-none"
-              type="submit"
-            >
+            <button type="submit" className={s.searchButton}>
               Search
             </button>
-            <HiOutlineRefresh
-              //   className="bg-[#3470ff] rounded-full p-[14px] w-12 h-12 text-center text-white font-semibold text-sm hover:bg-[#0b44cd] ease-linear duration-200 cursor-pointer"
+            <TiRefreshOutline
               onClick={() => {
                 dispatch(setHasMore(true));
                 dispatch(resetFilter());
+                resetForm();
               }}
+              className={s.refreshButton}
             />
           </Form>
         )}

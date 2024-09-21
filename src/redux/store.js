@@ -18,7 +18,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whiteList: ["favorites"],
+  whitelist: ["favorites"],
 };
 
 const persistedReducer = persistReducer(persistConfig, favoritesReducer);

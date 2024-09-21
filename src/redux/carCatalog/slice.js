@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   hasMore: true,
   currentCard: null,
+  isModalOpen: false,
 };
 
 const carsSlice = createSlice({
@@ -19,9 +20,11 @@ const carsSlice = createSlice({
 
     addCurrent: (state, action) => {
       state.currentCard = action.payload;
+      state.isModalOpen = true;
     },
     deleteCurrent: (state) => {
       state.currentCard = null;
+      state.isModalOpen = false;
     },
   },
   extraReducers: (builder) => {

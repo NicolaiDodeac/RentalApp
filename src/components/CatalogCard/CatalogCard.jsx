@@ -4,22 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectFavorites } from "../../redux/favorites/selectors";
 import { addFavorites, deleteFavorites } from "../../redux/favorites/slice";
 import { addCurrent } from "../../redux/carCatalog/slice";
+
 const CatalogCard = ({ car }) => {
   const dispatch = useDispatch();
   const isFavorite = useSelector(selectFavorites).find(
     (item) => item.id === car.id
   );
+
+  const handleFavoriteToggle = () => {
+    if (isFavorite) {
+      dispatch(deleteFavorites(car));
+    } else {
+      dispatch(addFavorites(car));
+    }
+  };
+
   return (
     <div className={s.card}>
       <div className={s.imageWrapper}>
-        <div>
+        <div className={s.heart}>
           {isFavorite ? (
-            <FaHeart
-              color="#3470FF"
-              onClick={() => dispatch(deleteFavorites(car))}
-            />
+            <FaHeart color="#3470FF" onClick={handleFavoriteToggle} />
           ) : (
-            <FaRegHeart onClick={() => dispatch(addFavorites(car))} />
+            <FaRegHeart onClick={handleFavoriteToggle} />
           )}
         </div>
         <img
@@ -28,34 +35,25 @@ const CatalogCard = ({ car }) => {
           className={s.image}
         />
       </div>
-      <div className={s.content}>
+
+      <div className={s.titleWrapper}>
         <h2 className={s.title}>
-          {car.make}{" "}
-          <span className={s.model}>
-            {car.model}, {car.year}
-          </span>
+          {car.make} <span className={s.model}>{car.model},</span> {car.year}
         </h2>
-        <div className={s.details}>
-          <p>{car.address}</p>
-          <p>{car.rentalCompany}</p>
-          <p>{car.type}</p>
-        </div>
-        <div className={s.features}>
-          <span>{car.fuelConsumption} L/100km</span>
-          <span>{car.engineSize} L</span>
-          <span>{car.functionalities[0]}</span>
-        </div>
-        <div className={s.footer}>
-          <p className={s.price}>{car.rentalPrice}/hr</p>
-          <button
-            onClick={() => dispatch(addCurrent(car))}
-            className={s.learnMore}
-          >
-            Learn more
-          </button>
-        </div>
+        <p className={s.price}>{car.rentalPrice}</p>
       </div>
+
+      <div className={s.details}>
+        <p> {car.address.split(",").slice(1).join(" | ")}</p> |
+        <p>{car.rentalCompany}</p> | <p>{car.type}</p> | <p>{car.make}</p> |{" "}
+        <p>{car.model}</p> | <p>{car.id}</p> |<p>{car.accessories[0]}</p>
+      </div>
+      {/* <div className={s.footer}> */}
+      <button onClick={() => dispatch(addCurrent(car))} className={s.learnMore}>
+        Learn more
+      </button>
     </div>
+    // </div>
   );
 };
 

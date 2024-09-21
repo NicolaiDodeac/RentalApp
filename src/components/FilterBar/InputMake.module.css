@@ -1,8 +1,9 @@
 .customSelect :global(.react-select__control) {
   cursor: pointer;
   border-radius: 14px;
-  padding: 14px 18px;
-  width: 100%;
+  padding: 14px 18px 14px 18px;
+  width: 224px;
+  /* width: 100%; */
   /* display: block; */
   border: none;
   transition: all 0.4s ease-in-out;
@@ -16,10 +17,6 @@
 
 .customSelect :global(.react-select__control:hover) {
   box-shadow: none;
-}
-
-.customSelect :global(.react-select__value-container) {
-  /* padding: 0; */
 }
 
 .customSelect :global(.react-select__placeholder) {
@@ -51,6 +48,9 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
+.customSelect :global(.react-select__single-value) {
+  font-size: 18px;
+}
 
 .customSelect :global(.react-select__option:hover) {
   color: #121417;
@@ -74,4 +74,13 @@
 
 .customSelect :global(.react-select__indicator-separator) {
   display: none;
+}
+
+.label {
+  color: #8a8a89;
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
 }

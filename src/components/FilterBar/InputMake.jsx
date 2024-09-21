@@ -9,10 +9,11 @@ const InputMake = () => {
   const dispatch = useDispatch();
   const value = useSelector(selectMake);
 
-  const handleBrandChange = (data) => dispatch(filterMake(data.value));
+  const handleBrandChange = (data) =>
+    dispatch(filterMake(data ? data.value : null));
 
   return (
-    <label className="text-[#8a8a89] text-xs relative ">
+    <label className={s.label}>
       Car brand
       <Select
         name="brand"
@@ -21,12 +22,12 @@ const InputMake = () => {
         className={s.customSelect}
         classNamePrefix="react-select"
         onChange={handleBrandChange}
-        placeholder="Brand "
-        value={value}
-        // defaultValue={optionsBrand[0].value}
-        // defaultInputValue={optionsBrand[0].value}
+        placeholder="Enter the text"
+        value={value ? makeData.find((option) => option.value === value) : null}
+        isClearable={true}
       />
     </label>
   );
 };
+
 export default InputMake;

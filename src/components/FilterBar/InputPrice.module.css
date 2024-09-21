@@ -1,1 +1,84 @@
+.priceSelect :global(.react-select__control) {
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 14px 18px;
+  width: 125px;
+  border: none;
+  transition: all 0.4s ease-in-out;
+  background: #f7f7fb;
+  cursor: pointer;
+}
 
+.priceSelect :global(.react-select__control--is-focused) {
+  box-shadow: none;
+}
+
+.priceSelect :global(.react-select__control:hover) {
+  box-shadow: none;
+}
+
+.priceSelect :global(.react-select__placeholder) {
+  font-size: 18px;
+  transition: all 0.2s ease-in-out;
+  color: #121417;
+}
+
+.priceSelect :global(.react-select__single-value) {
+  font-weight: 400;
+  color: #121417;
+}
+
+.priceSelect :global(.react-select__menu) {
+  border-radius: 8px;
+  margin-top: 4px;
+  z-index: 2;
+  width: 100%;
+  border: 1px solid rgba(18, 20, 23, 0.05);
+  border-radius: 14px;
+  box-shadow: 0 4px 36px 0 rgba(0, 0, 0, 0.02);
+  background: #fff;
+}
+
+.priceSelect :global(.react-select__option) {
+  color: rgba(18, 20, 23, 0.2);
+  font-size: 16px;
+  padding: 4px 18px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.priceSelect :global(.react-select__single-value) {
+  font-size: 18px;
+}
+
+.priceSelect :global(.react-select__option:hover) {
+  color: #121417;
+  background-color: var(--form_color);
+}
+
+.priceSelect :global(.react-select__dropdown-indicator) {
+  color: var(--white);
+  transition: all 0.2s ease-in-out;
+}
+
+.priceSelect :global(.react-select__dropdown-indicator:hover) {
+  color: #121417;
+}
+
+.priceSelect
+  :global(.react-select__control--menu-is-open)
+  :global(.react-select__dropdown-indicator) {
+  transform: rotate(180deg);
+}
+
+.priceSelect :global(.react-select__indicator-separator) {
+  display: none;
+}
+
+.label {
+  color: #8a8a89;
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+}

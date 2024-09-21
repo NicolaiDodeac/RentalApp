@@ -1,20 +1,26 @@
 import Modal from "react-modal";
-import { useDispatch } from "react-redux";
-import { Icons } from "../Icons/Icons";
-import { closeModal } from "../../redux/modal/slice";
-import { useMedia } from "../../hooks/useMedia";
-import s from "./ModalWrapper.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCurrent } from "../../redux/carCatalog/slice"; // <-- Correction: Removed 'openModal'
+import { useMedia } from "../../helpers/useMedia";
+import s from "./CarDetailsModal.module.css";
+import { ImCross } from "react-icons/im";
+import {
+  selectCurrentCard,
+  selectIsModalOpen,
+} from "../../redux/carCatalog/selectors"; // <-- Correction: Added 'selectIsModalOpen'
 
 Modal.setAppElement("#root");
 
-const ModalWrapper = ({ children, isOpenModal }) => {
+const CarDetailsModal = () => {
   const dispatch = useDispatch();
   const { isMobile } = useMedia();
+  const car = useSelector(selectCurrentCard);
+  const isModalOpen = useSelector(selectIsModalOpen); // <-- Correction: Get 'isModalOpen' from Redux
 
   return (
     <Modal
-      isOpen={isOpenModal}
-      onRequestClose={() => dispatch(closeModal())}
+      isOpen={isModalOpen} // <-- Correction: Use boolean value
+      onRequestClose={() => dispatch(deleteCurrent())}
       className={s.modal}
       overlayClassName={s.overlay}
     >
@@ -24,76 +30,107 @@ const ModalWrapper = ({ children, isOpenModal }) => {
           <button
             className={s.btnCloseModal}
             onClick={() => {
-              dispatch(closeModal());
+              dispatch(deleteCurrent());
             }}
           >
-            <Icons name={"close"} width={18} height={18} />
+            <ImCross />
           </button>
         )}
 
-        <div className={s.modalContent}>{children}</div>
+        <div className={s.modalContent}>
+          <h2>
+            {car.make} {car.model} ({car.year})
+          </h2>
+          <img
+            className={s.img}
+            src={car.img}
+            alt={`${car.make} ${car.model}`}
+          />
+          <p>{car.description}</p>
+          <p>Mileage: {car.mileage.toLocaleString()} km</p>
+          <p>Rental Price: ${car.rentalPrice}/hr</p>
+          <p>Fuel Consumption: {car.fuelConsumption} L/100km</p>
+          <p>Engine Size: {car.engineSize} L</p>
+          <p>Accessories: {car.accessories.join(", ")}</p>
+          <p>Functionalities: {car.functionalities.join(", ")}</p>
+          <p>Rental Company: {car.rentalCompany}</p>
+          <p>Address: {car.address}</p>
+          <p>Rental Conditions: {car.rentalConditions}</p>
+          <a href="tel:+380730000000" className={s.rentalButton}>
+            Rental Car
+          </a>
+        </div>
       </div>
     </Modal>
   );
 };
 
-export default ModalWrapper;
+export default CarDetailsModal;
 
-// import { useEffect } from "react";
-// import styles from "./CarDetailsModal.module.css";
-// import { useDispatch } from "react-redux";
+// import Modal from "react-modal";
+// import { useDispatch, useSelector } from "react-redux";
 // import { deleteCurrent } from "../../redux/carCatalog/slice";
+// import { useMedia } from "../../helpers/useMedia";
+// import s from "./CarDetailsModal.module.css";
+// import { ImCross } from "react-icons/im";
+// import { selectCurrentCard } from "../../redux/carCatalog/selectors";
 
-// const CarDetailsModal = ({ car }) => {
+// Modal.setAppElement("#root");
+
+// const CarDetailsModal = () => {
 //   const dispatch = useDispatch();
-
-//   const onClose = dispatch(deleteCurrent);
-//   useEffect(() => {
-//     const handleEsc = (event) => {
-//       if (event.key === "Escape") {
-//         onClose();
-//       }
-//     };
-//     window.addEventListener("keydown", handleEsc);
-//     return () => window.removeEventListener("keydown", handleEsc);
-//   }, [onClose]);
-
-//   const handleBackdropClick = (event) => {
-//     if (event.target.className === styles.backdrop) {
-//       console.log("abracadabra");
-//       onClose();
-//     }
-//   };
+//   const { isMobile } = useMedia();
+//   const car = useSelector(selectCurrentCard);
 
 //   return (
-//     <div className={styles.backdrop} onClick={handleBackdropClick}>
-//       <div className={styles.modalContent}>
-//         <button onClick={onClose} className={styles.closeButton}>
-//           ×
-//         </button>
-//         <h2>
-//           {car.make} {car.model} ({car.year})
-//         </h2>
-//         <img
-//           className={styles.img}
-//           src={car.img}
-//           alt={`${car.make} ${car.model}`}
-//         />
-//         <p>{car.description}</p>
-//         <p>Mileage: {car.mileage.toLocaleString()} km</p>
-//         <p>Rental Price: ${car.rentalPrice}/hr</p>
-//         <p>Fuel Consumption: {car.fuelConsumption} L/100km</p>
-//         <p>Engine Size: {car.engineSize} L</p>
-//         <p>Accessories: {car.accessories.join(", ")}</p>
-//         <p>Functionalities: {car.functionalities.join(", ")}</p>
-//         <p>Rental Company: {car.rentalCompany}</p>
-//         <p>Address: {car.address}</p>
-//         <p>Rental Conditions: {car.rentalConditions}</p>
-//         <a href="tel:+380730000000" className={styles.rentalButton}>
-//           Rental Car
-//         </a>
+//     <Modal
+//       isOpen={!!car}
+//       onRequestClose={() => dispatch(deleteCurrent())}
+//       className={s.modal}
+//       overlayClassName={s.overlay}
+//     >
+//       <div className={s.modalWrapper}>
+//         <div className={s.modalEllipse}></div>
+//         {!isMobile && (
+//           <button
+//             className={s.btnCloseModal}
+//             onClick={() => {
+//               dispatch(deleteCurrent());
+//             }}
+//           >
+//             <ImCross />
+//           </button>
+//         )}
+
+//         <div className={s.modalContent}>
+//           <div>
+//             <div className={s.modalContent}>
+//               <h2>
+//                 {car.make} {car.model} ({car.year})
+//               </h2>
+//               <img
+//                 className={s.img}
+//                 src={car.img}
+//                 alt={`${car.make} ${car.model}`}
+//               />
+//               <p>{car.description}</p>
+//               <p>Mileage: {car.mileage.toLocaleString()} km</p>
+//               <p>Rental Price: ${car.rentalPrice}/hr</p>
+//               <p>Fuel Consumption: {car.fuelConsumption} L/100km</p>
+//               <p>Engine Size: {car.engineSize} L</p>
+//               <p>Accessories: {car.accessories.join(", ")}</p>
+//               <p>Functionalities: {car.functionalities.join(", ")}</p>
+//               <p>Rental Company: {car.rentalCompany}</p>
+//               <p>Address: {car.address}</p>
+//               <p>Rental Conditions: {car.rentalConditions}</p>
+//               <a href="tel:+380730000000" className={s.rentalButton}>
+//                 Rental Car
+//               </a>
+//             </div>
+//           </div>
+//         </div>
 //       </div>
-//     </div>
+//     </Modal>
 //   );
 // };
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
+import { setHasMore } from "../carCatalog/slice";
 
 const initialState = {
   filteredCatalog: [],
@@ -14,9 +14,11 @@ const filteredSlice = createSlice({
   reducers: {
     addFilteredCars: (state, action) => {
       state.filteredCatalog = [...action.payload];
-      action.payload.length
-        ? toast.success(`${action.payload.length} results`)
-        : toast.error("No result");
+      if (action.payload.length < 12) {
+        setHasMore(false);
+      } else {
+        setHasMore(true);
+      }
     },
     filterMake: (state, action) => {
       state.make = action.payload;

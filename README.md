@@ -1,8 +1,29 @@
-# React + Vite
+# Car Rental Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application allows users to browse and rent cars in Ukraine.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- View a catalog of cars
+- Filter cars by brand, price, and mileage
+- Add cars to favorites
+- View detailed information in a modal
+- Responsive design
+
+## Technologies Used
+
+- React.js
+- Redux & Redux Toolkit
+- React Router
+- Axios
+- MockAPI
+- Formik
+- React-Select
+
+## Getting Started
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/car-rental-app.git
+   ```
