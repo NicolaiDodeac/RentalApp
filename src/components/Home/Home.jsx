@@ -35,28 +35,6 @@ const Home = ({ cars }) => {
         </div>
       </section>
 
-      {/* Why Choose Us Section
-      <section className={s.whyChooseUs}>
-        <h2 className={s.sectionTitle}>Why Choose Us</h2>
-        <div className={s.reasons}>
-          <div className={s.reason}>
-            <img src="/images/icon-cars.svg" alt="Wide Range" />
-            <h3>Wide Range of Cars</h3>
-            <p>From SUVs to sports cars, we have something for every need.</p>
-          </div>
-          <div className={s.reason}>
-            <img src="/images/icon-pricing.svg" alt="Affordable Pricing" />
-            <h3>Affordable Pricing</h3>
-            <p>Luxury at affordable prices.</p>
-          </div>
-          <div className={s.reason}>
-            <img src="/images/icon-support.svg" alt="24/7 Support" />
-            <h3>24/7 Support</h3>
-            <p>Always here to help, whenever you need us.</p>
-          </div>
-        </div>
-      </section> */}
-
       <footer className={s.footer}>
         <p>
           &copy; 2024 Car Rental App |{" "}

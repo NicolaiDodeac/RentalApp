@@ -1,8 +1,7 @@
-/* Hero Section */
 .hero {
   margin-top: 50px;
   height: 100vh;
-  background-image: url("https://www.hertz.com/content/dam/hertz/global/blog-articles/resources/one-way-rental.jpg"); /* Replace with your image */
+  background-image: url("https://www.hertz.com/content/dam/hertz/global/blog-articles/resources/one-way-rental.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -26,7 +25,6 @@
 
 .subtitle {
   font-size: 58px;
-  /* margin-bottom: 32px; */
   font-family: "Manrope", sans-serif;
   color: #fff;
 }
@@ -50,7 +48,6 @@
   background-color: #0b44cd;
 }
 
-/* Featured Cars Section */
 .featuredCars {
   padding: 60px 30px;
   text-align: center;
@@ -136,7 +133,6 @@
   background-color: #0056b3;
 }
 
-/* Footer Section */
 .footer {
   background-color: #121417;
   color: white;
